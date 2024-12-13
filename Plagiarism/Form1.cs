@@ -15,6 +15,15 @@ namespace Plagiarism
         public Form1()
         {
             InitializeComponent();
+
+            matchclass = new Match();
+        }
+
+        private Match matchclass;
+
+        private void buttonFind_Click(object sender, EventArgs e)
+        {
+            matchclass.Find(richTextBoxOriginalText.Text, textBoxInputPattern.Text);
         }
     }
 }
