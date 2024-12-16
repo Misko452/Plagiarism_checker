@@ -11,13 +11,21 @@ namespace Plagiarism
 
         public Pattern() { }
        
-        public static void GetLast(string patternFind)
+        public static int[] GetMatchTable(string patternFind)
         {
-            //int[] patternIndex = new int[128];
-
+            int[] table = new int[256];
             
+            for (int i = 0; i < table.Length; i++)
+            {
+                table[i] = -1;
+            }
 
-           // return last;
+            for (int j = 0; j < patternFind.Length; j++) //
+            {
+                table[(int)patternFind[j]] = j;
+            }
+
+            return table;
         }
 
 
