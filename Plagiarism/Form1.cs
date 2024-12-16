@@ -17,13 +17,38 @@ namespace Plagiarism
             InitializeComponent();
 
             matchclass = new Match();
+            percentage = new Percentage();
+            sourcebox = richTextBoxOriginalText;
         }
 
         private Match matchclass;
+        private Percentage percentage;
+        private List<int> matchlist;
+        private int lengthofPattern = 0;
+        private RichTextBox sourcebox;
 
-        private void buttonFind_Click(object sender, EventArgs e)
+        private void HighlightFinds()
         {
-            matchclass.Find(richTextBoxOriginalText.Text, textBoxInputPattern.Text);
+            sourcebox.SelectAll();
+            sourcebox.SelectionBackColor = Color.White;
+            foreach (int match in matchlist)
+            {
+                sourcebox.Select(match, lengthofPattern);
+                sourcebox.SelectionBackColor = Color.Yellow;
+            }
+        }
+
+        private void ActionFind()
+        {
+            matchlist = matchclass.Find(richTextBoxOriginalText.Text.ToLower(), textBoxInputPattern.Text.ToLower());
+            lengthofPattern = textBoxInputPattern.Text.Length;
+            HighlightFinds();
+            textBoxPercentage.Text = "Match percentage: " + percentage.FindPercentage(matchlist.Count() * lengthofPattern, richTextBoxOriginalText.Text.Length) + " %";
+        }
+
+        private void textBoxInputPattern_TextChanged(object sender, EventArgs e)
+        {
+            ActionFind();
         }
     }
 }
