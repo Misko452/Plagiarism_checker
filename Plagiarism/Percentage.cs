@@ -8,10 +8,9 @@ namespace Plagiarism
 {
     internal class Percentage
     {
-
-        public float FindPercentage(int matches, int lengthofsource)
-        {
-            return ((float)lengthofsource / 100) * (float)matches;      //Vzorec pro výpočeet procent
+        public float FindPercentage(int matches, int lengthofsource, int patternlength)
+        {    
+            return ((float)matches * 100) / ((float)lengthofsource / (float)patternlength);  //Vzorec pro výpočeet procent
         }
     }
 }

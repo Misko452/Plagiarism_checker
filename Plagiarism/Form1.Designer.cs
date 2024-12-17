@@ -65,7 +65,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1283, 858);
+            this.ClientSize = new System.Drawing.Size(1263, 858);
             this.Controls.Add(this.textBoxPercentage);
             this.Controls.Add(this.richTextBoxOriginalText);
             this.Controls.Add(this.textBoxInputPattern);

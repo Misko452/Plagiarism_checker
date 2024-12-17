@@ -25,7 +25,14 @@ namespace Plagiarism
             {
                 while (mover <= (source.Length - pattern.Length))                                                      //Zatímco je mover menší nebo stejný jako rozdíl délek původního textu a hledaného patternu
                 {
-                    while (patternindex >= 0 && pattern[patternindex] == source[mover + patternindex]) patternindex--; //Projde celý úsek těch indexů a projde písmenka
+                    while (patternindex >= 0)
+                    {
+                        if (pattern[patternindex] == source[mover + patternindex])
+                        {
+                            patternindex--;
+                        }
+                        else break;                                                                                    //Projde celý úsek těch indexů a projde písmenka
+                    }
                                                                                                                        //Vyskočí se z něj až když se najde neshoda
                     if (patternindex < 0)                                                                              //Zde ověří, zda cyklus skončil až po prohledání celého úseku
                     {                                                                                                  //Pokud ano, tak to do Listů matchů nacpe všechna čísla, která jsou indexy shody

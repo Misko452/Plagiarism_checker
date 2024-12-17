@@ -18,17 +18,18 @@ namespace Plagiarism
 
             matchclass = new Match();
             percentage = new Percentage();
-            sourcebox = richTextBoxOriginalText;
         }
 
         private Match matchclass;
         private Percentage percentage;
+
         private List<int> matchlist;
         private int lengthofPattern = 0;
-        private RichTextBox sourcebox;
+        
 
         private void HighlightFinds()
         {
+            RichTextBox sourcebox = richTextBoxOriginalText;
             sourcebox.SelectAll();
             sourcebox.SelectionBackColor = Color.White;
             foreach (int match in matchlist)
@@ -43,7 +44,7 @@ namespace Plagiarism
             matchlist = matchclass.Find(richTextBoxOriginalText.Text.ToLower(), textBoxInputPattern.Text.ToLower());
             lengthofPattern = textBoxInputPattern.Text.Length;
             HighlightFinds();
-            textBoxPercentage.Text = "Match percentage: " + percentage.FindPercentage(matchlist.Count() * lengthofPattern, richTextBoxOriginalText.Text.Length) + " %";
+            textBoxPercentage.Text = "Match percentage: " + percentage.FindPercentage(matchlist.Count(), richTextBoxOriginalText.Text.Length, lengthofPattern) + " %";
         }
 
         private void textBoxInputPattern_TextChanged(object sender, EventArgs e)
