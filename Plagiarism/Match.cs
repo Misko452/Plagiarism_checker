@@ -10,11 +10,9 @@ namespace Plagiarism
 {
     internal class Match
     {
-        private int[] table;
-
         public List<int> Find(string source, string pattern)
         {
-            table = Pattern.GetMatchTable(pattern);
+            int[] table = Pattern.GetMatchTable(pattern);
             
             int patternindex = pattern.Length-1; 
             int mover = 0; 
@@ -57,11 +55,7 @@ namespace Plagiarism
             return matches;
         }
 
-
-
     }
-    
-
-
+   
 }
 

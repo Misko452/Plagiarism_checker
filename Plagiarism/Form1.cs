@@ -28,28 +28,42 @@ namespace Plagiarism
         
 
         private void HighlightFinds()
-        {
-            RichTextBox sourcebox = richTextBoxOriginalText;
-            sourcebox.SelectAll();
+        {                                                           //Metoda pro grafické zpracování zvýraznění shod v textu
+            RichTextBox sourcebox = richTextBoxOriginalText;        //Načte se richtextbox (Víceřádkový textbox) do vlastní třídové proměnné pro jednodušší manipulaci
+            sourcebox.SelectAll();                                  //Pro jednodušší úklid předchozího zvýraznění si vybereme vše a vše přebarvíme na defaultní bílou
             sourcebox.SelectionBackColor = Color.White;
-            foreach (int match in matchlist)
-            {
-                sourcebox.Select(match, lengthofPattern);
-                sourcebox.SelectionBackColor = Color.Yellow;
+
+            foreach (int match in matchlist)                        //Následně se prochází získaný list shod
+            {   
+                sourcebox.Select(match, lengthofPattern);           //U každé shody se vybere začátek a délka selectu (shoda + délka patternu)
+                sourcebox.SelectionBackColor = Color.Yellow;        //Nový výběr se obarví na žluto
             }
         }
 
         private void ActionFind()
         {
-            matchlist = matchclass.Find(richTextBoxOriginalText.Text.ToLower(), textBoxInputPattern.Text.ToLower());
-            lengthofPattern = textBoxInputPattern.Text.Length;
+            matchlist = matchclass.Find(richTextBoxOriginalText.Text.ToLower(), textBoxInputPattern.Text.ToLower());                                                        //Najde pole shod podle načtených hodnot z UI pomocí externí třídy
+            lengthofPattern = textBoxInputPattern.Text.Length;                                                                                                              //Pro další výpočty si načte délku hledaného patternu
             HighlightFinds();
-            textBoxPercentage.Text = "Match percentage: " + percentage.FindPercentage(matchlist.Count(), richTextBoxOriginalText.Text.Length, lengthofPattern) + " %";
+            ChangePercents();
         }
 
-        private void textBoxInputPattern_TextChanged(object sender, EventArgs e)
+        private void ChangePercents()
+        {
+            textBoxPercentage.Text = "Match percentage: " + percentage.FindPercentage(matchlist.Count(), richTextBoxOriginalText.Text.Length, lengthofPattern) + " %";      //Do labelu vypíše text obsahující vypočtený % shody
+        }
+
+        private void textBoxInputPattern_TextChanged(object sender, EventArgs e)                                                                                            //Metoda co se volá pokaždé, co změníme hodnotu v poli, kam zadáváme pattern
         {
             ActionFind();
+        }
+
+        private void richTextBoxOriginalText_TextChanged(object sender, EventArgs e)
+        {
+            if (!(richTextBoxOriginalText.Text.Length == null || lengthofPattern == null || matchlist == null))
+            {
+                ChangePercents();
+            }
         }
     }
 }

@@ -50,6 +50,7 @@
             this.richTextBoxOriginalText.Size = new System.Drawing.Size(1193, 642);
             this.richTextBoxOriginalText.TabIndex = 1;
             this.richTextBoxOriginalText.Text = "";
+            this.richTextBoxOriginalText.TextChanged += new System.EventHandler(this.richTextBoxOriginalText_TextChanged);
             // 
             // textBoxPercentage
             // 
